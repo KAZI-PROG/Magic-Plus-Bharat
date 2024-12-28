@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Magic Plus Bharat: Professional services with cutting-edge 3D graphics in 4K quality.">
+    <title>Magic Plus Bharat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Zephyria', sans-serif;
+            background: linear-gradient(#00CCFF,#0700C4,#0000FF,#0052FF,#007AFF,#00A3FF);
+            color: white;
+            overflow-x: hidden;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 3rem;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        header h1 {
+            font-size: 1.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #ffdf00;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://via.placeholder.com/3840x2160') no-repeat center center/cover;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .hero-content h2 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+        .services {
+            padding: 5rem 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .service-card h3 {
+            margin-bottom: 1rem;
+        }
+        .about {
+            padding: 5rem 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        .about h2 {
+            margin-bottom: 1rem;
+        }
+        .pricing {
+            padding: 5rem 3rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffdf00;
+        }
+        .pricing h2 {
+            margin-bottom: 1rem;
+        }
+        .pricing p {
+            font-size: 1.5rem;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            margin-top: 2rem;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Magic Plus Bharat</h1>
+        <nav>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-content">
+            <h2>Experience Excellence</h2>
+            <p>YOUR CREATOR JOURNEY BEGINS HERE !!</p>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="service-card">
+            <h3>3D Graphics & Animation</h3>
+            <p>Create stunning Thumbnails for your Youtube Videos with high-quality 3D graphics.</p>
+        </div>
+        <div class="service-card">
+            <h3>Web Development</h3>
+            <p>Delivering modern, responsive, and high-performance video editing.</p>
+        </div>
+        <div class="service-card">
+            <h3>AI Solutions</h3>
+            <p>Empower your business with cutting-edge artificial intelligence tools.</p>
+        </div>
+        <div class="service-card">
+            <h3>Consulting</h3>
+            <p>Expert advice to take your ideas from concept to reality.</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>Magic Plus Bharat is dedicated to delivering innovative solutions across 3D graphics, web development, AI tools, and professional consulting. Our mission is to empower businesses with technology-driven excellence and creativity.</p>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <h2>Pricing</h2>
+        <p>Enjoy unlimited services for just <strong>₹199/year</strong> (previously ₹999).</p>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Magic Plus Bharat. All rights reserved. Contact us at <a href="mailto:soyebkazikasif@gmail.com">soyebkazikasif@gmail.com</a>.</p>
+    </footer>
+
+    <script>
+        // Initialize 3D background using Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('heroCanvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // Create animated particles
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 1000; i++) {
+            vertices.push((Math.random() - 0.5) * 200);
+            vertices.push((Math.random() - 0.5) * 200);
+            vertices.push((Math.random() - 0.5) * 200);
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const material = new THREE.PointsMaterial({ color: 0xffffff, size: 2 });
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        camera.position.z = 50;
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            points.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Adjust canvas on window resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>
+
+
+
+      
